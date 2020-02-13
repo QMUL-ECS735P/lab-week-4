@@ -56,7 +56,7 @@ warnings.filterwarnings('ignore')
 DBpedia has a SPARQL endpoint located at `http://dbpedia.org/sparql`. We're going to wrap that endpoint using the SPARQLWrapper, which means we can use a lot of handy methods to construct, exectue, and receive queries.
 
 ```python
-endpoint = SPARQLWrappe('http://dbpedia.org/sparql')
+endpoint = SPARQLWrapper('http://dbpedia.org/sparql')
 ```
 
 Now we're going to write a simple SPARQL query to get some information from the database:

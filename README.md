@@ -39,9 +39,11 @@ In this lab we'll be using an eternal API endpoint hosted by DBpedia. DBpedia is
 To write SPARQL queries as python strings, we'll be making good use of multi-line strings:
 
 ```python
+'''
 this is
 a multiline
 string
+'''
 ```
 
 Begin by importing the SPARQLWrapper library, and supressing some warnings to make the output clearer:

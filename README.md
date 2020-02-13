@@ -149,7 +149,6 @@ endpoint = SPARQLWrapper('http://dbpedia.org/sparql')
 We'll be using a CONSTRUCT query which tells SPARQL to construct new rdf triples based on the result of the query. For simplicity we'll simply create an exact copy of the graph.
 
 ```python
-query = '''
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 CONSTRUCT {
     <%(uri)s> a ?type .
@@ -164,6 +163,8 @@ WHERE {
     <%(uri)s> rdfs:label ?label .
     ?value rdfs:label ?vlabel .
     ?property rdfs:label ?plabel . 
+    
+    FILTER( LANG(?label)="es" || LANG(?label)="en" ) . 
 }
 '''
 ```

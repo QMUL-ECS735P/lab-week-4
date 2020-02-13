@@ -1,0 +1,23 @@
+This text file walks through the steps necessary to get work through the lab sheet on one of the computers in the ITL.
+
+1) Download and extract the lab materials from QM+ and make note of the directory you extract the materials to.
+   This will likely be something like `~/Downloads/lab-week-4`.
+   
+2) Open a terminal session and type `cd $DOWNLOAD_PATH` where $DOWNLOAD_PATH is the path you noted from the previous
+   step. For example: `cd ~/Downloads/lab-week-4`.
+   
+3) Type `ls` to confirm you're in the right directory; this will show all the files in the directory.
+
+4) Type `module load python/3.6.6`. This loads the right version of python and makes sure all the libraries we need are
+   accessible. This command has no output.
+   
+5) To confirm the environment was properly loaded, type `python --version`. The output should say `Python 3.6.6`.
+
+6) Type `jupyter notebook` to open a new jupyter notebook in the current directory, after a brief moment Google Chrome
+   should open up with our notebook.
+   
+7) Double click on `week-4-jupyter.ipynb` to open the lab sheet in Jupyter and you're good to go!
+
+8) [Optional] If you'd like to follow along with the jupyter notebook in the terminal, open a new terminal session (keep
+   the jupyter session open) and follow steps 2-5. Then simply type `python` to load an interactive python shell and then
+   you can follow along with the notebook.

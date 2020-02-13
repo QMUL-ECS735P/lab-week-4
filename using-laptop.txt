@@ -1,0 +1,38 @@
+Follow these instructions if you want to use your own laptop instead of the ITL machines. Please note I have next to no
+experience with Windows, if you're having troubles I'm happy to help but you're mostly on your own. The instructions below
+will assume a Unix system (Linux/macOS) but you should be able to follow along roughly on Windows.
+
+1) Make sure you have Python 3.6.6 installed on your laptop. There are newer versions of Python but this is the version
+   we use in the ITL so it makes it easier if everyone is on the same version.
+   
+   It's common for Linux and macOS systems to already have Python installed. You can find out by opening a terminal session
+   and typing `python --version`. 
+   
+   It's possible that the Python version reported will be 2.X.X. Test to see if you have Python 3 installed by typing
+   `python3 --version` instead. If you do have a version of Python3, great you're good to go. If not you can get the
+   installer from here: https://www.python.org/downloads/release/python-366/
+
+2) You now need to install the packages we need for the labs, these are `rdflib` and `sparqlwrapper`. These are simple
+   enough to install. First run `pip install rdflib==4.2.2`. NOTE: if you had to run python3 in the step above, you will
+   also need to run pip3 here instead of just pip.
+   
+   You may get a permissions error depending on how your system is setup, if that is the case simply run the command again
+   but with the `sudo` prefix. eg; `sudo pip install rdflib==4.2.2`. This will prompt for your password.
+   
+   Next install sparqlwrapper with `pip install SPARQLWrapper==1.8.0` (prepending `sudo` or using `pip3` where appropriate.
+
+3) [Optional] Install jupyter notebooks through pip with the following command `pip install notebook`. That's it, you're 
+   good to go!
+   
+4) Download and extract the lab materials from QM+ and make note of the directory you extract the materials to.
+   This will likely be something like `~/Downloads/lab-week-4`.
+   
+5) Open a terminal session and type `cd $DOWNLOAD_PATH` where $DOWNLOAD_PATH is the path you noted from the previous
+   step. For example: `cd ~/Downloads/lab-week-4`.
+   
+6) Type `ls` to confirm you're in the right directory; this will show all the files in the directory.
+
+8) Type `jupyter notebook` to open a new jupyter notebook in the current directory, after a brief moment Google Chrome
+   should open up with our notebook.
+   
+9) Double click on `week-4-jupyter.ipynb` to open the lab sheet in Jupyter and you're good to go!

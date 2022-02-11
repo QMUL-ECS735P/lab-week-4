@@ -1,0 +1,507 @@
+%PDF-1.3
+1 0 obj
+<< /Type /Catalog
+/Outlines 2 0 R
+/Pages 3 0 R >>
+endobj
+2 0 obj
+<< /Type /Outlines /Count 0 >>
+endobj
+3 0 obj
+<< /Type /Pages
+/Kids [6 0 R
+17 0 R
+19 0 R
+23 0 R
+27 0 R
+]
+/Count 5
+/Resources <<
+/ProcSet 4 0 R
+/Font << 
+/F1 8 0 R
+/F2 9 0 R
+/F3 10 0 R
+>>
+>>
+/MediaBox [0.000 0.000 595.280 841.890]
+ >>
+endobj
+4 0 obj
+[/PDF /Text ]
+endobj
+5 0 obj
+<<
+/Creator (DOMPDF)
+/CreationDate (D:20220211151521+00'00')
+/ModDate (D:20220211151521+00'00')
+>>
+endobj
+6 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Annots [ 11 0 R 13 0 R 15 0 R ]
+/Contents 7 0 R
+>>
+endobj
+7 0 obj
+<<
+/Length 3715 >>
+stream
+
+0.000 0.000 0.000 rg
+BT 34.016 784.469 Td /F1 12.0 Tf  [(This lab sheet and all other materials can be found on GitHub here: )] TJ ET
+0.000 0.000 0.800 rg
+BT 359.624 784.469 Td /F1 12.0 Tf  [(https://github.com/QMUL-ECS735P/lab-)] TJ ET
+0.000 0.000 0.800 RG
+0.6 w 0 J [  ] 0 d
+359.624 781.769 m 558.644 781.769 l S
+BT 34.016 770.213 Td /F1 12.0 Tf  [(week-4/)] TJ ET
+0.6 w 0 J [  ] 0 d
+34.016 767.513 m 72.668 767.513 l S
+0.000 0.000 0.000 rg
+BT 34.016 728.473 Td /F2 24.0 Tf  [(Introduction to SPARQL)] TJ ET
+BT 64.016 683.285 Td /F1 12.0 Tf  [(Session objectives: * Write and execute SPARQL queries * Merge RDF data from multiple )] TJ ET
+BT 64.016 669.029 Td /F1 12.0 Tf  [(sources)] TJ ET
+BT 34.016 622.131 Td /F2 18.0 Tf  [(1. Introduction)] TJ ET
+BT 34.016 591.509 Td /F1 12.0 Tf  [(As with the last lab, we'll be using Python to create SPARQL database queries and constructing RDF graphs )] TJ ET
+BT 34.016 577.253 Td /F1 12.0 Tf  [(from the result of those queries.)] TJ ET
+BT 34.016 550.997 Td /F1 12.0 Tf  [(If you're new to Python it would be wise to keep the basic tutorial handy for reference:)] TJ ET
+0.000 0.000 0.000 RG
+57.816 527.846 m 
+57.816 528.396 57.589 528.942 57.201 529.331 c
+56.812 529.720 56.266 529.946 55.716 529.946 c
+55.166 529.946 54.620 529.720 54.231 529.331 c
+53.842 528.942 53.616 528.396 53.616 527.846 c
+53.616 527.296 53.842 526.750 54.231 526.361 c
+54.620 525.973 55.166 525.746 55.716 525.746 c
+56.266 525.746 56.812 525.973 57.201 526.361 c
+57.589 526.750 57.816 527.296 57.816 527.846 c f
+0.000 0.000 0.800 rg
+BT 64.016 524.741 Td /F1 12.0 Tf  [(https://docs.python.org/3.7/tutorial/)] TJ ET
+0.000 0.000 0.800 RG
+0.6 w 0 J [  ] 0 d
+64.016 522.041 m 234.368 522.041 l S
+0.000 0.000 0.000 rg
+BT 34.016 498.485 Td /F1 12.0 Tf  [(Python scripts are run by calling the python command, followed by the name of the python script to execute, )] TJ ET
+BT 34.016 484.229 Td /F1 12.0 Tf  [(for example:)] TJ ET
+BT 34.016 459.418 Td /F3 12.0 Tf  [(python hello_world.py)] TJ ET
+BT 34.016 433.523 Td /F1 12.0 Tf  [(It is also possible to run python in an interactive mode known as a REPL, to do this simply call python )] TJ ET
+BT 34.016 419.267 Td /F1 12.0 Tf  [(without any arguments:)] TJ ET
+BT 34.016 394.456 Td /F3 12.0 Tf  [(python)] TJ ET
+BT 34.016 359.919 Td /F2 18.0 Tf  [(2. Writing SPARQL Queries)] TJ ET
+BT 34.016 329.297 Td /F1 12.0 Tf  [(In this lab we'll be using an external API endpoint hosted by DBpedia. DBpedia is a community-run )] TJ ET
+BT 34.016 315.041 Td /F1 12.0 Tf  [(resource that extracts linked data from Wikipedia.)] TJ ET
+BT 34.016 288.785 Td /F1 12.0 Tf  [(To write SPARQL queries as Python strings, we'll be making good use of multi-line strings)] TJ ET
+BT 34.016 263.974 Td /F3 12.0 Tf  [(''')] TJ ET
+BT 34.016 251.523 Td /F3 12.0 Tf  [(this is)] TJ ET
+BT 34.016 239.073 Td /F3 12.0 Tf  [(a multi-line)] TJ ET
+BT 34.016 226.623 Td /F3 12.0 Tf  [(string)] TJ ET
+BT 34.016 214.173 Td /F3 12.0 Tf  [(''')] TJ ET
+BT 34.016 188.278 Td /F1 12.0 Tf  [(Begin by importing the SRARQLWrapper library:)] TJ ET
+BT 34.016 163.466 Td /F3 12.0 Tf  [(!pip install sparqlwrapper # This is only necessary for the online notebook)] TJ ET
+BT 34.016 139.016 Td /F3 12.0 Tf  [(from SPARQLWrapper import SPARQLWrapper, JSON)] TJ ET
+BT 34.016 113.121 Td /F1 12.0 Tf  [(DBpedia has a SPARQL endpoint located at )] TJ ET
+BT 250.328 113.121 Td /F3 12.0 Tf  [(http://dbpedia.org/sparql)] TJ ET
+BT 430.328 113.121 Td /F1 12.0 Tf  [(. We're going to wrap that )] TJ ET
+BT 34.016 98.865 Td /F1 12.0 Tf  [(endpoint using the SPARQLWrapper, which means we can use a lot of handy methods to construct, execute, )] TJ ET
+BT 34.016 84.609 Td /F1 12.0 Tf  [(and receive queries.)] TJ ET
+endstream
+endobj
+8 0 obj
+<< /Type /Font
+/Subtype /Type1
+/Name /F1
+/BaseFont /Times-Roman
+/Encoding /WinAnsiEncoding
+>>
+endobj
+9 0 obj
+<< /Type /Font
+/Subtype /Type1
+/Name /F2
+/BaseFont /Times-Bold
+/Encoding /WinAnsiEncoding
+>>
+endobj
+10 0 obj
+<< /Type /Font
+/Subtype /Type1
+/Name /F3
+/BaseFont /Courier
+/Encoding /WinAnsiEncoding
+>>
+endobj
+11 0 obj
+<< /Type /Annot
+/Subtype /Link
+/A 12 0 R
+/Border [0 0 0]
+/H /I
+/Rect [ 359.6237 783.3895 558.6437 795.2695 ]
+>>
+endobj
+12 0 obj
+<< /Type /Action
+/S /URI
+/URI (https://github.com/QMUL-ECS735P/lab-week-4/)
+>>
+endobj
+13 0 obj
+<< /Type /Annot
+/Subtype /Link
+/A 14 0 R
+/Border [0 0 0]
+/H /I
+/Rect [ 34.0157 769.1335 72.6677 781.0135 ]
+>>
+endobj
+14 0 obj
+<< /Type /Action
+/S /URI
+/URI (https://github.com/QMUL-ECS735P/lab-week-4/)
+>>
+endobj
+15 0 obj
+<< /Type /Annot
+/Subtype /Link
+/A 16 0 R
+/Border [0 0 0]
+/H /I
+/Rect [ 64.0157 523.6615 234.3677 535.5415 ]
+>>
+endobj
+16 0 obj
+<< /Type /Action
+/S /URI
+/URI (https://docs.python.org/3.7/tutorial/)
+>>
+endobj
+17 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Contents 18 0 R
+>>
+endobj
+18 0 obj
+<<
+/Length 4545 >>
+stream
+
+0.000 0.000 0.000 rg
+0.000 0.000 0.800 RG
+0.6 w 0 J [  ] 0 d
+BT 34.016 785.914 Td /F3 12.0 Tf  [(endpoint = SPARQLWrapper\('http://dbpedia.org/sparql'\))] TJ ET
+BT 34.016 760.019 Td /F1 12.0 Tf  [(Now we're going to write a simple SPARQL query to get some information from the database:)] TJ ET
+BT 34.016 735.208 Td /F3 12.0 Tf  [(endpoint.setQuery\(''')] TJ ET
+BT 34.016 722.758 Td /F3 12.0 Tf  [(PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>)] TJ ET
+BT 34.016 710.307 Td /F3 12.0 Tf  [(PREFIX dbpr: <http://dbpedia.org/resource/>)] TJ ET
+BT 34.016 697.857 Td /F3 12.0 Tf  [(SELECT ?label)] TJ ET
+BT 34.016 685.407 Td /F3 12.0 Tf  [(WHERE { dbpr:Asturias rdfs:label ?label })] TJ ET
+BT 34.016 672.957 Td /F3 12.0 Tf  [('''\))] TJ ET
+BT 34.016 647.062 Td /F1 12.0 Tf  [(This doesn't execute the query. Before we execute the query, look at how it is constructed. Does it look )] TJ ET
+BT 34.016 632.806 Td /F1 12.0 Tf  [(familiar?)] TJ ET
+BT 34.016 606.550 Td /F1 12.0 Tf  [(The endpoint can respond in a variety of different serialisation forats, for today we'll be using JSON.)] TJ ET
+BT 34.016 581.738 Td /F3 12.0 Tf  [(endpoint.setReturnFormat\(JSON\))] TJ ET
+BT 34.016 555.844 Td /F1 12.0 Tf  [(Now to execute the query and print the results:)] TJ ET
+BT 34.016 531.032 Td /F3 12.0 Tf  [(results = endpoint.query\(\).convert\(\))] TJ ET
+BT 34.016 518.582 Td /F3 12.0 Tf  [(for result in results['results']['bindings']:)] TJ ET
+BT 34.016 506.132 Td /F3 12.0 Tf  [(  print\(result['label']['value']\))] TJ ET
+BT 34.016 480.237 Td /F1 12.0 Tf  [(Let's take a moment to unpack what's happening here. First we execute the query with )] TJ ET
+BT 34.016 465.981 Td /F3 12.0 Tf  [(endpoint.query\(\))] TJ ET
+BT 149.216 465.981 Td /F1 12.0 Tf  [( and then tell the SPARQLWrapper library to convert the response into Python )] TJ ET
+BT 34.016 451.725 Td /F1 12.0 Tf  [(nested dictionaries with )] TJ ET
+BT 151.004 451.725 Td /F3 12.0 Tf  [(.convert\(\))] TJ ET
+BT 223.004 451.725 Td /F1 12.0 Tf  [(.)] TJ ET
+BT 34.016 425.469 Td /F1 12.0 Tf  [(We then iterate over the array contained in )] TJ ET
+BT 241.952 425.469 Td /F3 12.0 Tf  [(results['results']['bindings'])] TJ ET
+BT 457.952 425.469 Td /F1 12.0 Tf  [( and print each value )] TJ ET
+BT 34.016 411.213 Td /F1 12.0 Tf  [(contained in )] TJ ET
+BT 96.008 411.213 Td /F3 12.0 Tf  [(result['label']['value'])] TJ ET
+BT 268.808 411.213 Td /F1 12.0 Tf  [(.)] TJ ET
+BT 34.016 384.957 Td /F1 12.0 Tf  [(To get a better idea of how the results dictionary is structured we can use the pprint library to pretty print the )] TJ ET
+BT 34.016 370.701 Td /F1 12.0 Tf  [(data.)] TJ ET
+BT 34.016 345.889 Td /F3 12.0 Tf  [(!pip install prettyprinter # This is only necessary for the online notebook)] TJ ET
+BT 34.016 321.439 Td /F3 12.0 Tf  [(from pprint import PrettyPrinter)] TJ ET
+BT 34.016 308.989 Td /F3 12.0 Tf  [(pretty = PrettyPrinter\(indent = 2\))] TJ ET
+BT 34.016 296.539 Td /F3 12.0 Tf  [(pretty.pprint\(results\))] TJ ET
+BT 34.016 270.644 Td /F1 12.0 Tf  [(Take a moment to familiarse with this data structure, all our responses from DBpedia will be in a similar )] TJ ET
+BT 34.016 256.388 Td /F1 12.0 Tf  [(format.)] TJ ET
+0.000 0.000 0.000 RG
+34.016 241.537 m 561.264 241.537 l 560.514 240.787 l 34.766 240.787 l  f
+0.160 0.160 0.160 rg
+0.160 0.160 0.160 RG
+34.016 240.037 m 561.264 240.037 l 560.514 240.787 l 34.766 240.787 l  f
+561.264 241.537 m 561.264 240.037 l 560.514 240.787 l 560.514 240.787 l  f
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+34.016 241.537 m 34.016 240.037 l 34.766 240.787 l 34.766 240.787 l  f
+BT 34.016 216.632 Td /F1 12.0 Tf  [(Now we'll use the FILTER constraint to filter out all responses other than those in English and Spanish.)] TJ ET
+BT 34.016 191.820 Td /F3 12.0 Tf  [(endpoint.setQuery\(''')] TJ ET
+BT 34.016 179.370 Td /F3 12.0 Tf  [(PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>)] TJ ET
+BT 34.016 166.920 Td /F3 12.0 Tf  [(PREFIX dbpr: <http://dbpedia.org/resource/>)] TJ ET
+BT 34.016 154.470 Td /F3 12.0 Tf  [(SELECT ?label)] TJ ET
+BT 34.016 142.019 Td /F3 12.0 Tf  [(WHERE {)] TJ ET
+BT 34.016 129.569 Td /F3 12.0 Tf  [(  dbpr:Asturias rdfs:label ?label .)] TJ ET
+BT 34.016 117.119 Td /F3 12.0 Tf  [(  FILTER\( LANG\(?label\)="es" || LANG\(?label\)="en"\) .)] TJ ET
+BT 34.016 104.669 Td /F3 12.0 Tf  [(})] TJ ET
+BT 34.016 92.219 Td /F3 12.0 Tf  [('''\))] TJ ET
+BT 34.016 66.324 Td /F1 12.0 Tf  [(As before, we'll execute the query and print the results:)] TJ ET
+BT 34.016 41.512 Td /F3 12.0 Tf  [(results = endpoint.query\(\).convert\(\))] TJ ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Annots [ 21 0 R ]
+/Contents 20 0 R
+>>
+endobj
+20 0 obj
+<<
+/Length 4727 >>
+stream
+
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+0.6 w 0 J [  ] 0 d
+BT 34.016 797.914 Td /F3 12.0 Tf  [(for result in results['results']['bindings']:)] TJ ET
+BT 34.016 785.464 Td /F3 12.0 Tf  [(  print\(result['label']['value']\))] TJ ET
+BT 34.016 759.569 Td /F1 12.0 Tf  [(We didn't need to specify the endpoint url or return format because we already did that previously. You can )] TJ ET
+BT 34.016 745.313 Td /F1 12.0 Tf  [(read more about the FILTER constraint here:)] TJ ET
+57.816 722.162 m 
+57.816 722.712 57.589 723.258 57.201 723.647 c
+56.812 724.035 56.266 724.262 55.716 724.262 c
+55.166 724.262 54.620 724.035 54.231 723.647 c
+53.842 723.258 53.616 722.712 53.616 722.162 c
+53.616 721.612 53.842 721.066 54.231 720.677 c
+54.620 720.288 55.166 720.062 55.716 720.062 c
+56.266 720.062 56.812 720.288 57.201 720.677 c
+57.589 721.066 57.816 721.612 57.816 722.162 c f
+0.000 0.000 0.800 rg
+BT 64.016 719.057 Td /F1 12.0 Tf  [(https://jena.apache.org/tutorials/sparql_filters.html)] TJ ET
+0.000 0.000 0.800 RG
+0.6 w 0 J [  ] 0 d
+64.016 716.357 m 307.004 716.357 l S
+0.000 0.000 0.000 rg
+BT 307.004 719.057 Td /F1 12.0 Tf  [(.)] TJ ET
+BT 34.016 692.801 Td /F1 12.0 Tf  [(Try changing the query to select responses in some languages that aren't English or Spanish. \(Hint, run the )] TJ ET
+BT 34.016 678.545 Td /F1 12.0 Tf  [(query with no )] TJ ET
+BT 103.676 678.545 Td /F3 12.0 Tf  [(FILTER)] TJ ET
+BT 146.876 678.545 Td /F1 12.0 Tf  [( and look at the )] TJ ET
+BT 223.868 678.545 Td /F3 12.0 Tf  [(xml:lang)] TJ ET
+BT 281.468 678.545 Td /F1 12.0 Tf  [( predicate\).)] TJ ET
+BT 34.016 643.647 Td /F2 18.0 Tf  [(3. Using SPARQLQrapper and RDFlib)] TJ ET
+BT 34.016 613.025 Td /F1 12.0 Tf  [(Now we'll use our knowledge from last week to create an RDF graph and populate it with the result from )] TJ ET
+BT 34.016 598.769 Td /F1 12.0 Tf  [(some SPARQL queries.)] TJ ET
+BT 34.016 572.513 Td /F1 12.0 Tf  [(For clarity, let's import everything we need first \(even though some of these things are already imported\). )] TJ ET
+BT 34.016 558.257 Td /F1 12.0 Tf  [(You'll likely need these imports for the coursework, so its handy to lay them out here.)] TJ ET
+BT 34.016 533.446 Td /F3 12.0 Tf  [(import rdflib)] TJ ET
+BT 34.016 520.995 Td /F3 12.0 Tf  [(from rdflib import plugin)] TJ ET
+BT 34.016 508.545 Td /F3 12.0 Tf  [(from rdflib.graph import Graph)] TJ ET
+BT 34.016 496.095 Td /F3 12.0 Tf  [(from rdflib.namespace import Namespace)] TJ ET
+BT 34.016 483.645 Td /F3 12.0 Tf  [(from SPARQLWrapper import SPARQLWrapper, JSON, XML)] TJ ET
+BT 34.016 471.194 Td /F3 12.0 Tf  [(endpoint = SPARQLWrapper\('http://dbpedia.org/sparql'\))] TJ ET
+BT 34.016 445.300 Td /F1 12.0 Tf  [(We'll be using a CONSTRUCT query which tells SPARQL to construct new rdf triples based on the result of )] TJ ET
+BT 34.016 431.044 Td /F1 12.0 Tf  [(the query. For simplicity we'll simply create an exact copy of the graph.)] TJ ET
+BT 34.016 406.232 Td /F3 12.0 Tf  [(query = ''')] TJ ET
+BT 34.016 393.782 Td /F3 12.0 Tf  [(PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>)] TJ ET
+BT 34.016 381.332 Td /F3 12.0 Tf  [(CONSTRUCT {)] TJ ET
+BT 34.016 368.881 Td /F3 12.0 Tf  [(    <%\(uri\)s> a ?type .)] TJ ET
+BT 34.016 356.431 Td /F3 12.0 Tf  [(    <%\(uri\)s> ?property ?value .)] TJ ET
+BT 34.016 343.981 Td /F3 12.0 Tf  [(    <%\(uri\)s> rdfs:label ?label .)] TJ ET
+BT 34.016 331.531 Td /F3 12.0 Tf  [(    ?value rdfs:label ?vlabel .)] TJ ET
+BT 34.016 319.080 Td /F3 12.0 Tf  [(    ?property rdfs:label ?plabel .)] TJ ET
+BT 34.016 306.630 Td /F3 12.0 Tf  [(})] TJ ET
+BT 34.016 294.180 Td /F3 12.0 Tf  [(WHERE {)] TJ ET
+BT 34.016 281.730 Td /F3 12.0 Tf  [(    <%\(uri\)s> a ?type.)] TJ ET
+BT 34.016 269.279 Td /F3 12.0 Tf  [(    <%\(uri\)s> ?property ?value .)] TJ ET
+BT 34.016 256.829 Td /F3 12.0 Tf  [(    <%\(uri\)s> rdfs:label ?label .)] TJ ET
+BT 34.016 244.379 Td /F3 12.0 Tf  [(    ?value rdfs:label ?vlabel .)] TJ ET
+BT 34.016 231.929 Td /F3 12.0 Tf  [(    ?property rdfs:label ?plabel .)] TJ ET
+BT 34.016 219.479 Td /F3 12.0 Tf  [(    FILTER\( LANG\(?label\)="es" || LANG\(?label\)="en" \) .)] TJ ET
+BT 34.016 207.028 Td /F3 12.0 Tf  [(})] TJ ET
+BT 34.016 194.578 Td /F3 12.0 Tf  [(''')] TJ ET
+BT 34.016 168.683 Td /F1 12.0 Tf  [(The above query string is using a Python feature called named placeholders. We use the % operator to )] TJ ET
+BT 34.016 154.427 Td /F1 12.0 Tf  [(replace the named placeholders with another string, it saves us some typing!)] TJ ET
+BT 34.016 129.616 Td /F3 12.0 Tf  [(endpoint.setQuery\(query % { 'uri': 'http://dbpedia.org/resource/Asturias' }\))] TJ ET
+BT 34.016 103.721 Td /F1 12.0 Tf  [(This time we'll set the return format to XML:)] TJ ET
+BT 34.016 78.910 Td /F3 12.0 Tf  [(endpoint.setReturnFormat\(XML\))] TJ ET
+endstream
+endobj
+21 0 obj
+<< /Type /Annot
+/Subtype /Link
+/A 22 0 R
+/Border [0 0 0]
+/H /I
+/Rect [ 64.0157 717.9770 307.0037 729.8570 ]
+>>
+endobj
+22 0 obj
+<< /Type /Action
+/S /URI
+/URI (https://jena.apache.org/tutorials/sparql_filters.html)
+>>
+endobj
+23 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Annots [ 25 0 R ]
+/Contents 24 0 R
+>>
+endobj
+24 0 obj
+<<
+/Length 4847 >>
+stream
+
+0.000 0.000 0.000 rg
+0.000 0.000 0.800 RG
+0.6 w 0 J [  ] 0 d
+BT 34.016 784.469 Td /F1 12.0 Tf  [(And then execute the query \(note: this may take a little time, don't worry!\))] TJ ET
+BT 34.016 759.658 Td /F3 12.0 Tf  [(graph = endpoint.query\(\).convert\(\))] TJ ET
+BT 34.016 733.763 Td /F1 12.0 Tf  [(The resulting graph is quite large, to print it in a notebook would take quite a while!)] TJ ET
+BT 34.016 707.507 Td /F1 12.0 Tf  [(If you're cleverer than me you might want to look at the )] TJ ET
+BT 304.796 707.507 Td /F3 12.0 Tf  [(itertools)] TJ ET
+BT 369.596 707.507 Td /F1 12.0 Tf  [( package and see if you can print just a )] TJ ET
+BT 34.016 693.251 Td /F1 12.0 Tf  [(subset of the graph. Maybe something like:)] TJ ET
+BT 34.016 668.440 Td /F3 12.0 Tf  [(import itertools)] TJ ET
+BT 34.016 655.990 Td /F3 12.0 Tf  [(for s, p, o in itertools.islice\(graph, 100\):)] TJ ET
+BT 34.016 643.539 Td /F3 12.0 Tf  [(  print\("subject: " + str\(s\)\))] TJ ET
+BT 34.016 631.089 Td /F3 12.0 Tf  [(  print\("predicate: " + str\(p\)\))] TJ ET
+BT 34.016 618.639 Td /F3 12.0 Tf  [(  print\("object: " + str\(o\) + "\\n"\))] TJ ET
+0.000 0.000 0.000 RG
+34.016 604.149 m 561.264 604.149 l 560.514 603.399 l 34.766 603.399 l  f
+0.160 0.160 0.160 rg
+0.160 0.160 0.160 RG
+34.016 602.649 m 561.264 602.649 l 560.514 603.399 l 34.766 603.399 l  f
+561.264 604.149 m 561.264 602.649 l 560.514 603.399 l 560.514 603.399 l  f
+0.000 0.000 0.000 rg
+0.000 0.000 0.000 RG
+34.016 604.149 m 34.016 602.649 l 34.766 603.399 l 34.766 603.399 l  f
+BT 34.016 579.244 Td /F1 12.0 Tf  [(The graph variable is an rdflib graph like the ones we were creating and manipulating last week. Today we'll )] TJ ET
+BT 34.016 564.988 Td /F1 12.0 Tf  [(use a new method, graph.query to write SPARQL queries for our local rdf graph.)] TJ ET
+BT 34.016 540.177 Td /F3 12.0 Tf  [(query = ''')] TJ ET
+BT 34.016 527.726 Td /F3 12.0 Tf  [(PREFIX dbpp: <http://dbpedia.org/property/>)] TJ ET
+BT 34.016 515.276 Td /F3 12.0 Tf  [(PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>)] TJ ET
+BT 34.016 502.826 Td /F3 12.0 Tf  [(SELECT DISTINCT ?location ?party ?leader)] TJ ET
+BT 34.016 490.376 Td /F3 12.0 Tf  [(WHERE {)] TJ ET
+BT 34.016 477.925 Td /F3 12.0 Tf  [(    <%\(uri\)s> rdfs:label ?location .)] TJ ET
+BT 34.016 465.475 Td /F3 12.0 Tf  [(    <%\(uri\)s> dbpp:leaderName ?leaderResource .)] TJ ET
+BT 34.016 453.025 Td /F3 12.0 Tf  [(    ?leaderResource rdfs:label ?leader .)] TJ ET
+BT 34.016 440.575 Td /F3 12.0 Tf  [(    <%\(uri\)s> dbpp:leaderParty ?partyResource .)] TJ ET
+BT 34.016 428.124 Td /F3 12.0 Tf  [(    ?partyResource rdfs:label ?party .)] TJ ET
+BT 34.016 415.674 Td /F3 12.0 Tf  [(    FILTER\( LANG\(?location\)="%\(lang\)s" && LANG\(?party\)="%\(lang\)s" && LANG\(?leader\)="%\(lang\)s"\) .)] TJ ET
+BT 34.016 403.224 Td /F3 12.0 Tf  [(})] TJ ET
+BT 34.016 390.774 Td /F3 12.0 Tf  [(''')] TJ ET
+BT 34.016 378.323 Td /F3 12.0 Tf  [(replacements = {)] TJ ET
+BT 34.016 365.873 Td /F3 12.0 Tf  [(  'uri': 'http://dbpedia.org/resource/Asturias',)] TJ ET
+BT 34.016 353.423 Td /F3 12.0 Tf  [(  'lang': 'es')] TJ ET
+BT 34.016 340.973 Td /F3 12.0 Tf  [(})] TJ ET
+BT 34.016 315.078 Td /F1 12.0 Tf  [(Now we can run the query just like we did for our SPARQL endpoint:)] TJ ET
+BT 34.016 290.267 Td /F3 12.0 Tf  [(results = graph.query\(query % replacements\))] TJ ET
+BT 34.016 277.816 Td /F3 12.0 Tf  [(for row in results:)] TJ ET
+BT 34.016 265.366 Td /F3 12.0 Tf  [(  print\('The leading party of %s is %s. Their leader is %s.' % row\))] TJ ET
+BT 34.016 239.471 Td /F1 12.0 Tf  [(Our initial construct query has both English and Spanish triples. Try re-running the query above to select )] TJ ET
+BT 34.016 225.215 Td /F1 12.0 Tf  [(English triples instead of Spanish ones.)] TJ ET
+BT 34.016 198.959 Td /F1 12.0 Tf  [(If you poked around using )] TJ ET
+BT 163.664 198.959 Td /F3 12.0 Tf  [(itertools)] TJ ET
+BT 228.464 198.959 Td /F1 12.0 Tf  [( to inspect the construct query response, you might want to play )] TJ ET
+BT 34.016 184.703 Td /F1 12.0 Tf  [(around here and construct your own queries.)] TJ ET
+BT 34.016 149.805 Td /F2 18.0 Tf  [(4. The Interactive DBpedia Endpoint)] TJ ET
+BT 34.016 119.183 Td /F1 12.0 Tf  [(DBpedia provides a web-based tool for writing and testing SPARQL queries. You can access it here: )] TJ ET
+0.000 0.000 0.800 rg
+BT 34.016 104.927 Td /F1 12.0 Tf  [(http://dbpedia.org/sparql/)] TJ ET
+0.000 0.000 0.800 RG
+0.6 w 0 J [  ] 0 d
+34.016 102.227 m 155.684 102.227 l S
+0.000 0.000 0.000 rg
+BT 34.016 78.671 Td /F1 12.0 Tf  [(Type or copy the following query into the text area:)] TJ ET
+BT 34.016 53.860 Td /F3 12.0 Tf  [(PREFIX dbpedia: <http://dbpedia.org/resource/>)] TJ ET
+BT 34.016 41.410 Td /F3 12.0 Tf  [(PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>)] TJ ET
+BT 34.016 28.959 Td /F3 12.0 Tf  [(PREFIX dbpp: <http://dbpedia.org/property/>)] TJ ET
+endstream
+endobj
+25 0 obj
+<< /Type /Annot
+/Subtype /Link
+/A 26 0 R
+/Border [0 0 0]
+/H /I
+/Rect [ 34.0157 103.8472 155.6837 115.7272 ]
+>>
+endobj
+26 0 obj
+<< /Type /Action
+/S /URI
+/URI (http://dbpedia.org/sparql/)
+>>
+endobj
+27 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Contents 28 0 R
+>>
+endobj
+28 0 obj
+<<
+/Length 1011 >>
+stream
+
+0.000 0.000 0.000 rg
+0.000 0.000 0.800 RG
+0.6 w 0 J [  ] 0 d
+BT 34.016 797.914 Td /F3 12.0 Tf  [(SELECT DISTINCT ?location ?leader ?party)] TJ ET
+BT 34.016 785.464 Td /F3 12.0 Tf  [(FROM <http://dbpedia.org>)] TJ ET
+BT 34.016 773.014 Td /F3 12.0 Tf  [(WHERE {)] TJ ET
+BT 34.016 760.563 Td /F3 12.0 Tf  [(  dbpedia:Asturias rdfs:label ?location ;)] TJ ET
+BT 34.016 748.113 Td /F3 12.0 Tf  [(  dbpp:leaderName ?leaderResource .)] TJ ET
+BT 34.016 735.663 Td /F3 12.0 Tf  [(  ?leaderResource rdfs:label ?leader .)] TJ ET
+BT 34.016 723.213 Td /F3 12.0 Tf  [(  dbpedia:Asturias dbpp:leaderParty ?partyResource .)] TJ ET
+BT 34.016 710.762 Td /F3 12.0 Tf  [(  ?partyResource rdfs:label ?party .)] TJ ET
+BT 34.016 698.312 Td /F3 12.0 Tf  [(})] TJ ET
+BT 34.016 672.417 Td /F1 12.0 Tf  [(You can then click the Execute Query to run the query and explore the results. This will generate a )] TJ ET
+BT 34.016 658.161 Td /F1 12.0 Tf  [(visualisation of the query that can be handy to see what it is you're selecting.)] TJ ET
+endstream
+endobj
+xref
+0 29
+0000000000 65535 f 
+0000000009 00000 n 
+0000000074 00000 n 
+0000000120 00000 n 
+0000000323 00000 n 
+0000000352 00000 n 
+0000000466 00000 n 
+0000000562 00000 n 
+0000004329 00000 n 
+0000004438 00000 n 
+0000004546 00000 n 
+0000004652 00000 n 
+0000004780 00000 n 
+0000004875 00000 n 
+0000005001 00000 n 
+0000005096 00000 n 
+0000005223 00000 n 
+0000005312 00000 n 
+0000005377 00000 n 
+0000009975 00000 n 
+0000010059 00000 n 
+0000014839 00000 n 
+0000014966 00000 n 
+0000015071 00000 n 
+0000015155 00000 n 
+0000020055 00000 n 
+0000020182 00000 n 
+0000020260 00000 n 
+0000020325 00000 n 
+trailer
+<<
+/Size 29
+/Root 1 0 R
+/Info 5 0 R
+>>
+startxref
+21389
+%%EOF
